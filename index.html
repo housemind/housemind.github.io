@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <!-- Primary Meta Tags -->
+  <meta name="title" content="Tokenization Allows Multimodal Large Language Models to Understand, Generate and Edit Architectural Floor Plans">
+  <meta name="description" content="HouseMind is a multimodal LLM framework that tokenizes outlines and room instances to understand, generate, and edit architectural floor plans with controllable spatial reasoning.">
+  <meta name="keywords" content="floor plan, multimodal LLM, spatial tokenization, VQ-VAE, layout generation, layout editing, layout understanding, architectural design">
+  <meta name="author" content="Sizhong Qin, Ramon Elias Weber, Xinzheng Lu">
+  <meta name="robots" content="index, follow">
+  <meta name="language" content="English">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="HouseMind">
+  <meta property="og:title" content="Tokenization Allows Multimodal Large Language Models to Understand, Generate and Edit Architectural Floor Plans">
+  <meta property="og:description" content="HouseMind is a multimodal LLM framework that tokenizes outlines and room instances to understand, generate, and edit architectural floor plans with controllable spatial reasoning.">
+  <meta property="og:url" content="https://qinsz01.github.io/housemind/">
+  <meta property="og:image" content="https://qinsz01.github.io/housemind/static/images/housemind.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="HouseMind - Research Preview">
+  <meta property="article:published_time" content="2026-02-01T00:00:00.000Z">
+  <meta property="article:author" content="Sizhong Qin, Ramon Elias Weber, Xinzheng Lu">
+  <meta property="article:section" content="Research">
+  <meta property="article:tag" content="floor plan">
+  <meta property="article:tag" content="multimodal LLM">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Tokenization Allows Multimodal Large Language Models to Understand, Generate and Edit Architectural Floor Plans">
+  <meta name="twitter:description" content="HouseMind is a multimodal LLM framework that tokenizes outlines and room instances to understand, generate, and edit architectural floor plans with controllable spatial reasoning.">
+  <meta name="twitter:image" content="https://qinsz01.github.io/housemind/static/images/housemind.png">
+  <meta name="twitter:image:alt" content="HouseMind - Research Preview">
+
+  <!-- Academic/Research Specific -->
+  <meta name="citation_title" content="Tokenization Allows Multimodal Large Language Models to Understand, Generate and Edit Architectural Floor Plans">
+  <meta name="citation_author" content="Qin, Sizhong">
+  <meta name="citation_author" content="Weber, Ramon Elias">
+  <meta name="citation_author" content="Lu, Xinzheng">
+  <meta name="citation_publication_date" content="2026">
+  <meta name="citation_conference_title" content="CVPR">
+  <meta name="citation_pdf_url" content="https://qinsz01.github.io/housemind/static/pdfs/housemind-paper.pdf">
+  
+  <!-- Additional SEO -->
+  <meta name="theme-color" content="#2563eb">
+  <meta name="msapplication-TileColor" content="#2563eb">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  
+  <!-- Preconnect for performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://ajax.googleapis.com">
+  <link rel="preconnect" href="https://documentcloud.adobe.com">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+
+
+  <title>HouseMind | CVPR 2026</title>
+  
+  <!-- Favicon and App Icons -->
+  <link rel="icon" type="image/png" href="static/images/housemind.png">
+  <link rel="apple-touch-icon" href="static/images/housemind.png">
+  
+  <!-- Critical CSS - Load synchronously -->
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+  
+  <!-- Non-critical CSS - Load asynchronously -->
+  <link rel="preload" href="static/css/bulma-carousel.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="static/css/bulma-slider.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="static/css/fontawesome.all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  
+  <!-- Fallback for browsers that don't support preload -->
+  <noscript>
+    <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+    <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+    <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  </noscript>
+  
+  <!-- Fonts - Optimized loading -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Defer non-critical JavaScript -->
+  <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script defer src="static/js/bulma-carousel.min.js"></script>
+  <script defer src="static/js/bulma-slider.min.js"></script>
+  <script defer src="static/js/index.js"></script>
+  
+  <!-- Structured Data for Academic Papers -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ScholarlyArticle",
+    "headline": "Tokenization Allows Multimodal Large Language Models to Understand, Generate and Edit Architectural Floor Plans",
+    "description": "HouseMind is a multimodal LLM framework that tokenizes outlines and room instances to understand, generate, and edit architectural floor plans with controllable spatial reasoning.",
+    "author": [
+      {
+        "@type": "Person",
+        "name": "Sizhong Qin",
+        "affiliation": {
+          "@type": "Organization",
+          "name": "Tsinghua University"
+        }
+      },
+      {
+        "@type": "Person",
+        "name": "Ramon Elias Weber",
+        "affiliation": {
+          "@type": "Organization",
+          "name": "UC Berkeley"
+        }
+      },
+      {
+        "@type": "Person",
+        "name": "Xinzheng Lu",
+        "affiliation": {
+          "@type": "Organization",
+          "name": "Tsinghua University"
+        }
+      }
+    ],
+    "datePublished": "2026-02-01",
+    "publisher": {
+      "@type": "Organization",
+      "name": "CVPR"
+    },
+    "url": "https://qinsz01.github.io/housemind/",
+    "image": "https://qinsz01.github.io/housemind/static/images/teaser.png",
+    "keywords": ["floor plan", "multimodal LLM", "spatial tokenization", "VQ-VAE", "layout generation", "layout editing", "layout understanding"],
+    "abstract": "Architectural floor plan design demands joint reasoning over geometry, semantics, and spatial hierarchy, which remains a major challenge for current AI systems. HouseMind is a multimodal large language model that unifies floor plan understanding, generation, and editing in one framework. It introduces discrete room-instance tokens via VQ-VAE to bridge layout geometry and symbolic reasoning, enabling controllable and interpretable operations. Experiments show strong geometric validity and controllability while remaining efficient and locally deployable.",
+    "citation": "Tokenization Allows Multimodal Large Language Models to Understand, Generate and Edit Architectural Floor Plans. CVPR 2026.",
+    "isAccessibleForFree": true,
+    "license": "https://creativecommons.org/licenses/by/4.0/",
+    "mainEntity": {
+      "@type": "WebPage",
+      "@id": "https://qinsz01.github.io/housemind/"
+    },
+    "about": [
+      {
+        "@type": "Thing",
+        "name": "Floor Plan Generation"
+      },
+      {
+        "@type": "Thing",
+        "name": "Multimodal Reasoning"
+      }
+    ]
+  }
+  </script>
+  
+  <!-- Website/Organization Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "HouseMind",
+    "url": "https://qinsz01.github.io/housemind/",
+    "logo": "https://qinsz01.github.io/housemind/static/images/housemind.png"
+  }
+  </script>
+</head>
+<body>
+
+
+  <!-- Scroll to Top Button -->
+  <button class="scroll-to-top" onclick="scrollToTop()" title="Scroll to top" aria-label="Scroll to top">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <!-- More Works Dropdown removed -->
+
+  <main id="main-content">
+  <section class="hero hero-home">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <div class="hero-logo">
+              <img src="static/images/housemind.png" alt="HouseMind" width="80" height="80" loading="eager">
+            </div>
+            <h1 class="title is-2 publication-title">HouseMind</h1>
+            <p class="subtitle is-4 publication-subtitle">Tokenization Allows Multimodal Large Language Models to Understand, Generate and Edit Architectural Floor Plans</p>
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">Sizhong Qin<sup>1,2</sup>,</span>
+              <span class="author-block">Ramon Elias Weber<sup>†2</sup>,</span>
+              <span class="author-block">Xinzheng Lu<sup>†1</sup></span>
+            </div>
+            <div class="is-size-5 publication-authors">
+              <span class="author-block"><sup>1</sup>Tsinghua University &nbsp; <sup>2</sup>UC Berkeley</span>
+              <span class="eql-cntrb"><small><br><sup>†</sup>Equal contribution</small></span>
+            </div>
+            <div class="is-size-5 publication-authors">
+              <span class="author-block publication-venue-inline">CVPR 2026 (Accepted)</span>
+            </div>
+            <div class="publication-links">
+              <a href="#" rel="noopener" class="external-link button is-normal is-rounded is-dark" title="Paper coming soon" aria-disabled="true">
+                <span class="icon"><i class="fas fa-file-pdf"></i></span>
+                <span>Paper (Soon)</span>
+              </a>
+              <a href="#" rel="noopener" class="external-link button is-normal is-rounded is-dark" title="Code coming soon" aria-disabled="true">
+                <span class="icon"><i class="fab fa-github"></i></span>
+                <span>Code (Soon)</span>
+              </a>
+              <a href="https://housemind.ai-structure.com/" target="_blank" rel="noopener" class="external-link button is-normal is-rounded is-dark" title="Runnable online demo">
+                <span class="icon"><i class="fas fa-play-circle"></i></span>
+                <span>Demo</span>
+              </a>
+              <a href="https://cloud.tsinghua.edu.cn/f/7cbe9e7039f843e78236/" target="_blank" rel="noopener" class="external-link button is-normal is-rounded is-dark" title="Benchmark test dataset (data_test.zip)">
+                <span class="icon"><i class="fas fa-database"></i></span>
+                <span>Benchmark</span>
+              </a>
+              <a href="https://cloud.tsinghua.edu.cn/f/e1e91fedfd3f4d80b8f0/" target="_blank" rel="noopener" class="external-link button is-normal is-rounded is-dark" title="Model weights (weights.zip)">
+                <span class="icon"><i class="fas fa-weight-hanging"></i></span>
+                <span>Weights</span>
+              </a>
+              <a href="https://my.feishu.cn/wiki/OY2gwDtU3iKQs4kje21c4Hojn3e" target="_blank" rel="noopener" class="external-link button is-normal is-rounded is-dark">
+                <span class="icon"><i class="fas fa-book"></i></span>
+                <span>Docs (EN)</span>
+              </a>
+              <a href="https://my.feishu.cn/wiki/VpmHwmPB3ixCXOktc0Ycm4BQnxb" target="_blank" rel="noopener" class="external-link button is-normal is-rounded is-dark">
+                <span class="icon"><i class="fas fa-book"></i></span>
+                <span>Docs (中文)</span>
+              </a>
+            </div>
+            <p class="hero-note is-size-7">Tutorial videos and docs available in English and Chinese. Benchmark test dataset: download and extract into repo root.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+<!-- Teaser -->
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <div class="box media-frame">
+        <img class="media-img" src="static/images/teaser.png" alt="HouseMind Teaser" loading="eager">
+      </div>
+      <h2 class="subtitle has-text-centered">
+        Teaser: outline and room-instance tokenization enables controllable generation, editing, and understanding.
+      </h2>
+    </div>
+  </div>
+</section>
+<!-- End teaser -->
+
+<!-- Paper abstract -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Architectural floor plan design demands joint reasoning over geometry, semantics, and spatial hierarchy, which remains a major challenge for current AI systems. HouseMind is a multimodal large language model that unifies floor plan understanding, generation, and editing in one framework. It introduces discrete room-instance tokens via VQ-VAE to bridge layout geometry and symbolic reasoning, enabling controllable and interpretable operations. Experiments show strong geometric validity and controllability while remaining efficient and locally deployable.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End paper abstract -->
+
+<!-- Key contributions -->
+<section class="section section-contributions">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Key Contributions</h2>
+    <div class="columns">
+      <div class="column">
+        <div class="contribution-card">
+          <div class="contribution-icon"><i class="fas fa-layer-group"></i></div>
+          <h3 class="title is-5">Unified Multitask</h3>
+          <p>One framework for understanding, generation, and editing of floor plans with a shared token vocabulary.</p>
+        </div>
+      </div>
+      <div class="column">
+        <div class="contribution-card">
+          <div class="contribution-icon"><i class="fas fa-th"></i></div>
+          <h3 class="title is-5">Spatial Tokenization</h3>
+          <p>Outline and room-instance tokens bridge geometry with symbolic reasoning for controllable layout edits.</p>
+        </div>
+      </div>
+      <div class="column">
+        <div class="contribution-card">
+          <div class="contribution-icon"><i class="fas fa-bolt"></i></div>
+          <h3 class="title is-5">Practical Efficiency</h3>
+          <p>Compact VQ-VAE + LLM pipeline enables strong geometric validity with local, efficient inference.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End key contributions -->
+
+
+<!-- Demo video: single player, toggle EN / 中文 -->
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3 has-text-centered">Demo</h2>
+      <div class="box media-frame demo-video-single">
+        <div class="demo-video-lang-tabs">
+          <button type="button" class="demo-lang-tab is-active" data-lang="en" aria-pressed="true">English</button>
+          <button type="button" class="demo-lang-tab" data-lang="zh" aria-pressed="false">中文</button>
+        </div>
+        <video id="demo-video-player" class="media-img" controls preload="metadata" playsinline>
+          <source id="demo-video-source" src="static/videos/housemind使用说明-en.mp4" type="video/mp4">
+        </video>
+        <p id="demo-video-caption" class="demo-video-caption has-text-centered is-size-7">Tutorial (English)</p>
+      </div>
+      <p class="has-text-centered is-size-7 demo-video-note">The English tutorial has no audio. <span class="is-hidden-mobile">英文教程无配音。</span></p>
+    </div>
+  </div>
+</section>
+<!-- End demo video -->
+
+<!-- Results -->
+<section class="section is-light">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Results</h2>
+    <div class="box media-frame">
+      <img class="media-img" src="static/images/results.png" alt="HouseMind Results" loading="lazy">
+    </div>
+    <p class="has-text-centered">
+      Qualitative results across generation, editing, and understanding tasks.
+    </p>
+  </div>
+</section>
+<!-- End Results -->
+
+
+
+
+<!-- Optional: add video presentation or poster sections here -->
+<!--End paper poster -->
+
+
+
+<!--BibTex citation -->
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <div class="bibtex-header">
+        <h2 class="title">BibTeX</h2>
+        <button class="copy-bibtex-btn" onclick="copyBibTeX()" title="Copy BibTeX to clipboard">
+          <i class="fas fa-copy"></i>
+          <span class="copy-text">Copy</span>
+        </button>
+      </div>
+      <pre id="bibtex-code"><code>@inproceedings{housemind2026,
+  title={Tokenization Allows Multimodal Large Language Models to Understand, Generate and Edit Architectural Floor Plans},
+  author={Qin, Sizhong and Weber, Ramon Elias and Lu, Xinzheng},
+  booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+  year={2026}
+}</code></pre>
+    </div>
+</section>
+<!--End BibTex citation -->
+
+
+  <footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+
+          <p>
+            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
+            You are free to borrow the source code of this website, we just ask that you link back to this page in the footer. <br> This website is licensed under a <a rel="license"  href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Statcounter tracking code -->
+  
+<!-- You can add a tracker to track page visits by creating an account at statcounter.com -->
+
+    <!-- End of Statcounter Code -->
+
+  </body>
+  </html>
