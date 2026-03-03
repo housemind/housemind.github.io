@@ -9,5 +9,5 @@ Open `index.html` directly in a browser, or serve this folder with any static se
 ## Deployment
 
 - Recommended repo name: `housemind_page`
-- Default page URL: `https://qinsz01.github.io/housemind_page/`
+- Default page URL: `https://housemind.github.io/`
 - If using a custom domain, configure it in GitHub Pages settings.
